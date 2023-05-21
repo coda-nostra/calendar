@@ -1,0 +1,47 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    // "../shared/.eslintrc",
+    "airbnb-typescript",
+    "prettier/react",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "@typescript-eslint"],
+  "env": {
+    "jest": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": ["error"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.js", "**/*.spec.js", "./webpack/*"]
+      }
+    ],
+    "@typescript-eslint/semi": ["error"],
+    "import/prefer-default-export": 0,
+    "react/destructuring-assignment": 0,
+    "react/jsx-props-no-spreading": 0,
+    "no-plusplus": 0
+  },
+  "ignorePatterns": ["node_modules/*", "scripts/*"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx", ".js", ".jsx"]
+    },
+    "import/ignore": ["types"],
+    "import/resolver": {
+      "alias": []
+    }
+  }
+}
