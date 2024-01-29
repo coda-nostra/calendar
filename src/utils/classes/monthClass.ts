@@ -40,11 +40,11 @@ export class Month extends DateComponent {
     this.type = '__month';
     const { startingDay, keyExtender, order } = data;
     this.startingDay = getIndexForUnknown(startingDay);
-    console.log(
-      'EWEEK_DAYS starting day::',
-      getWeekDaysFromIndex(this.startingDay as TWeekDayIndexes),
-      this.startingDay,
-    );
+    // console.log(
+    //   'EWEEK_DAYS starting day::',
+    //   getWeekDaysFromIndex(this.startingDay as TWeekDayIndexes),
+    //   this.startingDay,
+    // );
     this.#weekDays = getWeekDaysFromIndex(
       this.startingDay as TWeekDayIndexes,
     ) as EWEEK_DAYS[];

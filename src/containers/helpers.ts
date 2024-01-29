@@ -8,16 +8,16 @@ type PassingArgs = {
   order: MONTH_ORDER;
 };
 
-function calculatePagerPosition(pastMonth?:Month | null): number {
+function calculatePagerPosition(pastMonth?: Month | null): number {
   if (!pastMonth) return 0;
   return 1;
 }
 
 function getCalculatedMonth(
-  current:Date,
-  comparator:Date,
-  calcFunc:(arg1:number|Date,arg:number|Date)=>Date,
-  rest: PassingArgs,
+  current: Date,
+  comparator: Date,
+  calcFunc: (arg1: number | Date, arg: number | Date) => Date,
+  rest: PassingArgs
 ): Month | null {
   if (
     comparator &&
@@ -32,19 +32,25 @@ function getCalculatedMonth(
   });
 }
 
-function calculateMinMonth(current:Date, pastScrollRange:number): Date | undefined {
+function calculateMinMonth(
+  current: Date,
+  pastScrollRange: number
+): Date | undefined {
   let out;
   if (pastScrollRange || pastScrollRange === 0)
     out = subMonths(current, pastScrollRange + 1);
-  console.log({ out });
+  // console.log({ out });
   return out;
 }
 
-function calculateMaxMonth(current:Date, futureScrollRange:number): Date | undefined {
+function calculateMaxMonth(
+  current: Date,
+  futureScrollRange: number
+): Date | undefined {
   let out;
   if (futureScrollRange || futureScrollRange === 0)
     out = addMonths(current, futureScrollRange);
-  console.log({ out });
+  // console.log({ out });
   return out;
 }
 

@@ -1,6 +1,9 @@
-import { subMonths, addMonths, /* , format, isSameMonth  */ 
-subYears,
-addYears} from 'date-fns';
+import {
+  subMonths,
+  addMonths /* , format, isSameMonth  */,
+  subYears,
+  addYears,
+} from 'date-fns';
 import React, { memo, ReactElement, useState, useContext } from 'react';
 import { MONTH_ORDER /* , MONTH_FORMAT */ } from '../consts';
 import { MonthControllerCtx, BaseConfigCtx } from '../contexts';
@@ -33,14 +36,15 @@ function MonthController({
       date: initialDate,
       startingDay: startingDayIndex,
       order: MONTH_ORDER.PRESENT,
-    }),
+    })
   );
 
   const [finalMinMonth] = useState(
-    calculateMinMonth(currentMonth.date, pastScrollRange ?? 0),
+    calculateMinMonth(currentMonth.date, pastScrollRange ?? 0)
   );
   const [finalMaxMonth] = useState(
-    calculateMaxMonth(currentMonth.date, futureScrollRange ?? 0));
+    calculateMaxMonth(currentMonth.date, futureScrollRange ?? 0)
+  );
   // console.log({
   //   finalMinMonth,
   //   finalMaxMonth,
@@ -48,25 +52,39 @@ function MonthController({
   // });
 
   const [previousMonth, setPreviousMonth] = useState<Month | null>(
-    // @ts-expect-error subMonths is compatible
-    getCalculatedMonth(currentMonth.date, finalMinMonth|| subYears(currentMonth.date, 100), subMonths, {
-      order: MONTH_ORDER.PAST,
-      startingDayIndex,
-    }),
+    getCalculatedMonth(
+      currentMonth.date,
+      finalMinMonth || subYears(currentMonth.date, 100),
+      // @ts-expect-error subMonths is compatible
+      subMonths,
+      {
+        order: MONTH_ORDER.PAST,
+        startingDayIndex,
+      }
+    )
   );
   const [nextMonth, setNextMonth] = useState<Month | null>(
-    // @ts-expect-error addMonths is compatible
-    getCalculatedMonth(currentMonth.date, finalMaxMonth || addYears(currentMonth.date, 100), addMonths, {
-      order: MONTH_ORDER.FUTURE,
-      startingDayIndex,
-    }),
+    getCalculatedMonth(
+      currentMonth.date,
+      finalMaxMonth || addYears(currentMonth.date, 100),
+      // @ts-expect-error subMonths is compatible
+      addMonths,
+      {
+        order: MONTH_ORDER.FUTURE,
+        startingDayIndex,
+      }
+    )
   );
 
   const [pagerPosition, setPagerPosition] = useState<number>(
-    calculatePagerPosition(previousMonth),
+    calculatePagerPosition(previousMonth)
   );
 
-  const setNewValues = (past:Month|null, present:Month, future:Month|null): void => {
+  const setNewValues = (
+    past: Month | null,
+    present: Month,
+    future: Month | null
+  ): void => {
     setPreviousMonth(past);
     setCurrentMonth(present);
     setNextMonth(future);
@@ -85,7 +103,7 @@ function MonthController({
       finalMaxMonth || addYears(currentMonth.date, 100),
       // @ts-expect-error addMonths is compatible
       addMonths,
-      { order: MONTH_ORDER.FUTURE, startingDayIndex },
+      { order: MONTH_ORDER.FUTURE, startingDayIndex }
     );
     // if (newFuture === null) return;
     const newCurrent = nextMonth;
@@ -97,13 +115,13 @@ function MonthController({
   const monthBack = (): void => {
     // console.log('%c @MonthController/monthBack', 'color:#f00');
     if (!previousMonth) return;
-    
+
     const newPast = getCalculatedMonth(
       previousMonth.date,
-      finalMinMonth|| subYears(currentMonth.date, 100),
+      finalMinMonth || subYears(currentMonth.date, 100),
       // @ts-expect-error subMonths is compatible
       subMonths,
-      { order: MONTH_ORDER.PAST, startingDayIndex },
+      { order: MONTH_ORDER.PAST, startingDayIndex }
     );
     // console.log({ newPast });
     // if (newPast === null) return;
@@ -127,21 +145,21 @@ function MonthController({
     }
   };
 
-  console.groupCollapsed('MonthController');
-  console.log({
-    currentMonth,
-    previousMonth,
-    nextMonth,
-    monthForward,
-    monthBack,
-    getByOrder,
-    keys: getKeys({ currentMonth, nextMonth, previousMonth }),
-    futureScrollRange,
-    pastScrollRange,
-    finalMaxMonth,
-    finalMinMonth,
-  });
-  console.groupEnd();
+  // console.groupCollapsed('MonthController');
+  // console.log({
+  //   currentMonth,
+  //   previousMonth,
+  //   nextMonth,
+  //   monthForward,
+  //   monthBack,
+  //   getByOrder,
+  //   keys: getKeys({ currentMonth, nextMonth, previousMonth }),
+  //   futureScrollRange,
+  //   pastScrollRange,
+  //   finalMaxMonth,
+  //   finalMinMonth,
+  // });
+  // console.groupEnd();
   return (
     <MonthControllerCtx.Provider
       value={{

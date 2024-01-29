@@ -9,7 +9,7 @@ function asWeekDay(day: string): EWEEK_DAYS{
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   invariant(wdIndex !== -1, 'asWeekDay:Not a week day');
   const wkv = Object.keys(EWEEK_DAYS)[wdIndex];
-  console.log('asWeekDay', day, wkv,wdIndex);
+  // console.log('asWeekDay', day, wkv,wdIndex);
   if(wdIndex>=0)
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return EWEEK_DAYS[wkv as keyof typeof EWEEK_DAYS];
@@ -37,7 +37,7 @@ function getWeekDaysFromIndex(index: TWeekDayIndexes): Array<string> {
     if (i >= index) before.push(day);
     else after.push(day);
   });
-  console.log('getWeekDaysFromIndex', index, before.concat(after));
+  // console.log('getWeekDaysFromIndex', index, before.concat(after));
   return before.concat(after);
 }
 

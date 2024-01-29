@@ -2,7 +2,7 @@
 import { subMonths, addMonths } from 'date-fns';
 import { createContext } from 'react';
 import { MONTH_ORDER } from '../consts';
-import { Month } from '../utils';
+import { Month } from '../utils/classes';
 
 export type SetMonthFunction<T> = React.Dispatch<React.SetStateAction<T>>;
 
@@ -10,25 +10,26 @@ export interface TopKeysObject {
   past: string;
   present: string;
   future: string;
-  viewPager:string
+  viewPager: string;
 }
 
 export interface MonthMap {
-  currentMonth: Month;previousMonth: Month | null;nextMonth: Month | null;
+  currentMonth: Month;
+  previousMonth: Month | null;
+  nextMonth: Month | null;
 }
 
-export interface IMonthControllerCtx extends MonthMap{
-  
+export interface IMonthControllerCtx extends MonthMap {
   setCurrentMonth: SetMonthFunction<Month>;
-  
+
   setPreviousMonth: SetMonthFunction<Month | null>;
-  
+
   setNextMonth: SetMonthFunction<Month | null>;
   monthForward: () => void;
   monthBack: () => void;
   getByOrder: (order: MONTH_ORDER) => Month | null;
   keys: TopKeysObject;
-  pagerPosition:number;
+  pagerPosition: number;
 }
 export const MonthControllerCtx = createContext<IMonthControllerCtx>({
   currentMonth: new Month({
@@ -57,7 +58,7 @@ export const MonthControllerCtx = createContext<IMonthControllerCtx>({
     past: '',
     present: '',
     future: '',
-    viewPager:'defaultPagerKey'
+    viewPager: 'defaultPagerKey',
   },
-  pagerPosition:1
+  pagerPosition: 1,
 });
